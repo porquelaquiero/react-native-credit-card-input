@@ -10,9 +10,11 @@ import ReactNative, {
   TextInput,
   ViewPropTypes,
 } from "react-native";
+import { Icon } from "native-base";
 
 import CreditCard from "./CardView";
 import CCInput from "./CCInput";
+import CardNumberInput from "./CardNumberInput";
 import { InjectedProps } from "./connectToState";
 
 const s = StyleSheet.create({
@@ -140,6 +142,7 @@ export default class CreditCardInput extends Component {
   };
 
   render() {
+    console.log("JOEJOE", this._inputProps("cvc"))
     const {
       cardImageFront, cardImageBack, inputContainerStyle,
       values: { number, expiry, cvc, name, type }, focused,
@@ -164,24 +167,168 @@ export default class CreditCardInput extends Component {
           keyboardShouldPersistTaps="always"
           scrollEnabled={allowScroll}
           showsHorizontalScrollIndicator={false}
-          style={s.form}>
-          <CCInput {...this._inputProps("number")}
+          style={{ width: '100%', marginTop: 20, paddingHorizontal: 4, }}
+        >
+          <View style={{
+            display: 'flex',
+            flexDirection: 'row',
+            width: "100%",
+            justifyContent: "flex-start",
+            marginTop: 20
+          }}>
+            <Icon
+              name="ios-alert"
+              type="Ionicons"
+              style={{ fontSize: 18 }}
+            />
+            <Text style={{ marginLeft: 10, marginTop: 1 }}>Card Number</Text>
+          </View>
+          <CardNumberInput
+            placeholder="1234 5678 1234 5678"
+            placeholderColor="gray"
+            ref={this._inputProps("number").ref}
+            status={this._inputProps("number").status}
+            validColor={this._inputProps("number").validColor}
+            value={this._inputProps("number").value}
             keyboardType="numeric"
-            containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
-          <CCInput {...this._inputProps("expiry")}
+            additionalInputProps={undefined}
+            field="number"
+            inputStyle={[{ height: 14 }, undefined]}
+            invalidColor="red"
+            labelStyle={this._inputProps("number").labelStyle}
+            onChange={this._inputProps("number").onChange}
+            onFocus={this._inputProps("number").onFocus}
+            onBecomeValid={this._inputProps("number").onBecomeValid}
+            onBecomeEmpty={this._inputProps("number").onBecomeEmpty}
+            containerStyle={{
+              marginTop: 10,
+              padding: 15,
+              borderWidth: 1,
+              backgroundColor: "white",
+              borderColor: "#939598",
+              borderRadius: 10,
+              fontFamily: 'Montserrat-Regular'
+            }} />
+          <View style={{
+            display: 'flex',
+            flexDirection: 'row',
+            width: "100%",
+            justifyContent: "flex-start",
+            marginTop: 20
+          }}>
+            <Icon
+              name="ios-calendar"
+              type="Ionicons"
+              style={{ fontSize: 18 }}
+            />
+            <Text style={{ marginLeft: 10, marginTop: 1 }}>Expiry Date</Text>
+          </View>
+          <CCInput
+            inputStyle={[{ height: 14 }, undefined]}
+            additionalInputProps={this._inputProps("expiry").additionalInputProps}
+            field={this._inputProps("expiry").field}
+            invalidColor={this._inputProps("expiry").invalidColor}
+            onBecomeEmpty={this._inputProps("expiry").onBecomeEmpty}
+            onBecomeValid={this._inputProps("expiry").onBecomeValid}
+            onChange={this._inputProps("expiry").onChange}
+            onFocus={this._inputProps("expiry").onFocus}
+            placeholder={this._inputProps("expiry").placeholder}
+            placeholderColor={this._inputProps("expiry").placeholderColor}
+            ref={this._inputProps("expiry").ref}
+            status={this._inputProps("expiry").status}
+            validColor={this._inputProps("expiry").validColor}
+            value={this._inputProps("expiry").value}
             keyboardType="numeric"
-            containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
-          { requiresCVC &&
-            <CCInput {...this._inputProps("cvc")}
-              keyboardType="numeric"
-              containerStyle={[s.inputContainer, inputContainerStyle, { width: CVC_INPUT_WIDTH }]} /> }
-          { requiresName &&
-            <CCInput {...this._inputProps("name")}
-              containerStyle={[s.inputContainer, inputContainerStyle, { width: NAME_INPUT_WIDTH }]} /> }
-          { requiresPostalCode &&
+            containerStyle={{
+              marginTop: 10,
+              padding: 15,
+              borderWidth: 1,
+              backgroundColor: "white",
+              borderColor: "#939598",
+              borderRadius: 10,
+              fontFamily: 'Montserrat-Regular'
+            }} />
+          <View style={{
+            display: 'flex',
+            flexDirection: 'row',
+            width: "100%",
+            justifyContent: "flex-start",
+            marginTop: 20
+          }}>
+            <Icon
+              name="md-lock"
+              type="Ionicons"
+              style={{ fontSize: 18 }}
+            />
+            <Text style={{ marginLeft: 10, marginTop: 1 }}>CCV Number</Text>
+          </View>
+          <CCInput
+            inputStyle={[{ height: 14 }, undefined]}
+            additionalInputProps={this._inputProps("cvc").additionalInputProps}
+            field={this._inputProps("cvc").field}
+            invalidColor={this._inputProps("cvc").invalidColor}
+            onBecomeEmpty={this._inputProps("cvc").onBecomeEmpty}
+            onBecomeValid={this._inputProps("cvc").onBecomeValid}
+            onChange={this._inputProps("cvc").onChange}
+            onFocus={this._inputProps("cvc").onFocus}
+            placeholder={this._inputProps("cvc").placeholder}
+            placeholderColor={this._inputProps("cvc").placeholderColor}
+            ref={this._inputProps("cvc").ref}
+            status={this._inputProps("cvc").status}
+            validColor={this._inputProps("cvc").validColor}
+            value={this._inputProps("cvc").value}
+            keyboardType="numeric"
+            containerStyle={{
+              marginTop: 10,
+              padding: 15,
+              borderWidth: 1,
+              backgroundColor: "white",
+              borderColor: "#939598",
+              borderRadius: 10,
+              fontFamily: 'Montserrat-Regular'
+            }} />
+          <View style={{
+            display: 'flex',
+            flexDirection: 'row',
+            width: "100%",
+            justifyContent: "flex-start",
+            marginTop: 20
+          }}>
+            <Icon
+              name="person"
+              type="MaterialIcons"
+              style={{ fontSize: 18 }}
+            />
+            <Text style={{ marginLeft: 10, marginTop: 1 }}>Card Holder Name</Text>
+          </View>
+          <CCInput
+            inputStyle={[{ height: 14 }, undefined]}
+            additionalInputProps={this._inputProps("name").additionalInputProps}
+            field={this._inputProps("name").field}
+            invalidColor={this._inputProps("name").invalidColor}
+            onBecomeEmpty={this._inputProps("name").onBecomeEmpty}
+            onBecomeValid={this._inputProps("name").onBecomeValid}
+            onChange={this._inputProps("name").onChange}
+            onFocus={this._inputProps("name").onFocus}
+            placeholder={this._inputProps("name").placeholder}
+            placeholderColor={this._inputProps("name").placeholderColor}
+            ref={this._inputProps("name").ref}
+            status={this._inputProps("name").status}
+            validColor={this._inputProps("name").validColor}
+            value={this._inputProps("name").value}
+            containerStyle={{
+              marginTop: 10,
+              padding: 15,
+              borderWidth: 1,
+              backgroundColor: "white",
+              borderColor: "#939598",
+              borderRadius: 10,
+              fontFamily: 'Montserrat-Regular'
+            }} />
+          {requiresPostalCode &&
             <CCInput {...this._inputProps("postalCode")}
               keyboardType="numeric"
-              containerStyle={[s.inputContainer, inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} /> }
+              containerStyle={[s.inputContainer, inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} />}
         </ScrollView>
       </View>
     );
