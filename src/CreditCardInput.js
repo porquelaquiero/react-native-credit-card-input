@@ -142,7 +142,6 @@ export default class CreditCardInput extends Component {
   };
 
   render() {
-    console.log("JOEJOE", this._inputProps("cvc"))
     const {
       cardImageFront, cardImageBack, inputContainerStyle,
       values: { number, expiry, cvc, name, type }, focused,
