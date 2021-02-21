@@ -45,6 +45,12 @@ const POSTAL_CODE_INPUT_WIDTH = 120;
 
 /* eslint react/prop-types: 0 */ // https://github.com/yannickcr/eslint-plugin-react/issues/106
 export default class CreditCardInput extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      focusedInput: "",
+    };
+  }
   static propTypes = {
     ...InjectedProps,
     labels: PropTypes.object,
@@ -96,7 +102,9 @@ export default class CreditCardInput extends Component {
     additionalInputsProps: {},
   };
 
-  componentDidMount = () => this._focus(this.props.focused);
+  componentDidMount = () => {
+    this._focus(this.props.focused);
+  }
 
   componentWillReceiveProps = newProps => {
     if (this.props.focused !== newProps.focused) this._focus(newProps.focused);
@@ -196,7 +204,10 @@ export default class CreditCardInput extends Component {
             invalidColor="red"
             labelStyle={this._inputProps("number").labelStyle}
             onChange={this._inputProps("number").onChange}
-            onFocus={this._inputProps("number").onFocus}
+            onFocus={() => {
+              this._inputProps("number").onFocus;
+              this.setState({ focusedInput: 'cardNumber' });
+            }}
             onBecomeValid={this._inputProps("number").onBecomeValid}
             onBecomeEmpty={this._inputProps("number").onBecomeEmpty}
             containerStyle={{
@@ -204,7 +215,7 @@ export default class CreditCardInput extends Component {
               padding: 15,
               borderWidth: 1,
               backgroundColor: "white",
-              borderColor: "#939598",
+              borderColor: this.state.focusedInput == "cardNumber" ? "#BCBEC0" : "#414042",
               borderRadius: 10,
               fontFamily: 'Montserrat-Regular'
             }} />
@@ -230,7 +241,10 @@ export default class CreditCardInput extends Component {
             onBecomeEmpty={this._inputProps("expiry").onBecomeEmpty}
             onBecomeValid={this._inputProps("expiry").onBecomeValid}
             onChange={this._inputProps("expiry").onChange}
-            onFocus={this._inputProps("expiry").onFocus}
+            onFocus={() => {
+              this._inputProps("expiry").onFocus;
+              this.setState({ focusedInput: 'expiryDate' });
+            }}
             placeholder={this._inputProps("expiry").placeholder}
             placeholderColor={this._inputProps("expiry").placeholderColor}
             ref={this._inputProps("expiry").ref}
@@ -243,7 +257,7 @@ export default class CreditCardInput extends Component {
               padding: 15,
               borderWidth: 1,
               backgroundColor: "white",
-              borderColor: "#939598",
+              borderColor: this.state.focusedInput == "expiryDate" ? "#BCBEC0" : "#414042",
               borderRadius: 10,
               fontFamily: 'Montserrat-Regular'
             }} />
@@ -269,7 +283,10 @@ export default class CreditCardInput extends Component {
             onBecomeEmpty={this._inputProps("cvc").onBecomeEmpty}
             onBecomeValid={this._inputProps("cvc").onBecomeValid}
             onChange={this._inputProps("cvc").onChange}
-            onFocus={this._inputProps("cvc").onFocus}
+            onFocus={() => {
+              this._inputProps("cvc").onFocus;
+              this.setState({ focusedInput: 'cvc' });
+            }}
             placeholder={this._inputProps("cvc").placeholder}
             placeholderColor={this._inputProps("cvc").placeholderColor}
             ref={this._inputProps("cvc").ref}
@@ -282,7 +299,7 @@ export default class CreditCardInput extends Component {
               padding: 15,
               borderWidth: 1,
               backgroundColor: "white",
-              borderColor: "#939598",
+              borderColor: this.state.focusedInput == "cvc" ? "#BCBEC0" : "#414042",
               borderRadius: 10,
               fontFamily: 'Montserrat-Regular'
             }} />
@@ -308,7 +325,10 @@ export default class CreditCardInput extends Component {
             onBecomeEmpty={this._inputProps("name").onBecomeEmpty}
             onBecomeValid={this._inputProps("name").onBecomeValid}
             onChange={this._inputProps("name").onChange}
-            onFocus={this._inputProps("name").onFocus}
+            onFocus={() => {
+              this._inputProps("name").onFocus;
+              this.setState({ focusedInput: 'name' });
+            }}
             placeholder={this._inputProps("name").placeholder}
             placeholderColor={this._inputProps("name").placeholderColor}
             ref={this._inputProps("name").ref}
@@ -320,7 +340,7 @@ export default class CreditCardInput extends Component {
               padding: 15,
               borderWidth: 1,
               backgroundColor: "white",
-              borderColor: "#939598",
+              borderColor: this.state.focusedInput == "name" ? "#BCBEC0" : "#414042",
               borderRadius: 10,
               fontFamily: 'Montserrat-Regular'
             }} />
